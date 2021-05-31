@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::group(['prefix'=>'admin', 'as'=>'backend.'], function() {
+    // Route::group(['prefix'=>'products','as'=>'products.'],function() {
+    //   Route::get('/', [ProductsController::class, 'list'])->name('list');
+    //   Route::get('/create', [ProductsController::class, 'create'])->name('create');
+    //   Route::post('/create', [ProductsController::class, 'store'])->name('store');
+    //   Route::post('/{id}/update', [ProductsController::class, 'update'])->name('update');
+    //   Route::get('/{id}/edit', [ProductsController::class, 'edit'])->name('edit');
+    //   Route::post('/upload-images', [ProductsController::class, 'uploadImages'])->name('upload_images');
+    // });
+    Route::get('/', ['App\Http\Controllers\Backend\DashboardController', 'index'])->name('index');
 });
