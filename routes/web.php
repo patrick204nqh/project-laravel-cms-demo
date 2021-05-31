@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::group(['prefix'=>'admin', 'as'=>'backend.'], function() {
+Route::group(['prefix'=>'admin', 'middleware'=>['can:isAdmin'] , 'as'=>'backend.'], function() {
     // Route::group(['prefix'=>'products','as'=>'products.'],function() {
     //   Route::get('/', [ProductsController::class, 'list'])->name('list');
     //   Route::get('/create', [ProductsController::class, 'create'])->name('create');
