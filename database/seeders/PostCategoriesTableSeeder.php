@@ -15,10 +15,14 @@ class PostCategoriesTableSeeder extends Seeder
 
         $faker = Faker::create();
 
-        foreach (range(1,10) as $index) {
+        foreach (range(1,100) as $index) {
             \App\Models\PostCategory::create([
-                'alias' => $faker->words(3, true),
-                'description' => $faker->sentence()
+                'category_id' => 1,
+                'post_id' => $index
+            ]);
+            \App\Models\PostCategory::create([
+                'category_id' => $faker->numberBetween(2, 10),
+                'post_id' => $index
             ]);
         }
     }

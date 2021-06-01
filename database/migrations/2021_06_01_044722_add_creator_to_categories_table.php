@@ -13,7 +13,7 @@ class AddCreatorToCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('post_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->unsignedBigInteger('creator_id')->nullable();
 
             $table->foreign('creator_id')->references('id')->on('users');
@@ -27,7 +27,7 @@ class AddCreatorToCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('post_categories', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('creator_id');
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddParentToCategoriesTable extends Migration
+class AddPostToPostCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddParentToCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->unsignedBigInteger('parent_id')->nullable();
+        Schema::table('post_categories', function (Blueprint $table) {
+            $table->unsignedBigInteger('post_id');
 
-            $table->foreign('parent_id')->references('id')->on('categories');
+            $table->foreign('post_id')->references('id')->on('posts');
         });
     }
 
@@ -27,8 +27,8 @@ class AddParentToCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn('parent_id');
+        Schema::table('post_categories', function (Blueprint $table) {
+            $table->dropColumn('post_id');
         });
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
 
-class PostsTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
     public function run()
     {
@@ -15,10 +15,10 @@ class PostsTableSeeder extends Seeder
 
         $faker = Faker::create();
 
-        foreach (range(1,100) as $index) {
-            \App\Models\Post::create([
-                'title' => $faker->words(6, true),
-                'content' => $faker->paragraph(),
+        foreach (range(1,10) as $index) {
+            \App\Models\Category::create([
+                'alias' => $faker->words(3, true),
+                'description' => $faker->sentence(),
                 'creator_id' => $faker->numberBetween(1, 3)
             ]);
         }

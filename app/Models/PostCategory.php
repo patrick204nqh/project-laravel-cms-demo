@@ -8,35 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostCategory extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $hidden = ['deleted_at'];
+    public $timestamps = false;
 
     protected $fillable = [
-        'alias',
-        'description',
-        'parent_id',
-        'creator_id'
+        'category_id',
+        'post_id'
     ];
 
-    public function parent()
+    public function post()
     {
-        return $this->belongsTo('App\Models\PostCategory', 'parent_id');
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
-    public function childs()
+    public function category()
     {
-        return $this->hasMany('App\Models\PostCategory', 'parent_id');
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class, 'category_id');
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'creator_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
 }

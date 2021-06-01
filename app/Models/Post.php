@@ -15,13 +15,12 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'creator_id',
-        'category_id'
+        'creator_id'
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(PostCategory::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'post_categories', 'post_id', 'category_id');
     }
 
     public function creator()
