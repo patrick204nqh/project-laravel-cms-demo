@@ -21,13 +21,15 @@ Route::get('/blog', ['App\Http\Controllers\Frontend\BlogController', 'index'])->
 Route::get('/blog/{id}/details', ['App\Http\Controllers\Frontend\BlogController', 'details'])->name('blog_details');
 
 Route::group(['prefix'=>'backend', 'middleware'=>['can:isAdmin'] , 'as'=>'backend.'], function() {
+    // Dashboard
     Route::get('/', ['App\Http\Controllers\Backend\DashboardController', 'index'])->name('dashboard');
-    // Route::group(['prefix'=>'products','as'=>'products.'],function() {
-    //   Route::get('/', [ProductsController::class, 'list'])->name('list');
-    //   Route::get('/create', [ProductsController::class, 'create'])->name('create');
-    //   Route::post('/create', [ProductsController::class, 'store'])->name('store');
-    //   Route::post('/{id}/update', [ProductsController::class, 'update'])->name('update');
-    //   Route::get('/{id}/edit', [ProductsController::class, 'edit'])->name('edit');
-    //   Route::post('/upload-images', [ProductsController::class, 'uploadImages'])->name('upload_images');
-    // });
+    // Blogs
+    Route::group(['prefix'=>'blogs', 'as'=>'blogs.'], function() {
+        Route::group(['prefix'=>'posts','as'=>'posts.'],function() {
+            Route::get('/', ['App\Http\Controllers\Backend\Blogs\PostsController', 'list'])->name('list');
+        });
+        Route::group(['prefix'=>'categories','as'=>'categories.'],function() {
+            Route::get('/', ['App\Http\Controllers\Backend\Blogs\CategoriesController', 'list'])->name('list');
+        });
+    });
 });
