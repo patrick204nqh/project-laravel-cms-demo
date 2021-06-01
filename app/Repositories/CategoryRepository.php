@@ -11,7 +11,7 @@ class CategoryRepository extends BaseRepository implements RepositoryInterface
         return \App\Models\Category::class;
     }
 
-    public function getCategories($params)
+    public function getCategories($params = null)
     {
         $query = $this->model;
 
