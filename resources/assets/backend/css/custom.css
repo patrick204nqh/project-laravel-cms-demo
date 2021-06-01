@@ -1,0 +1,23 @@
+.dropdown li:hover > ul.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 10rem;
+    margin-top: -6px;
+}
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+}
+.dropdown-item.dropdown-toggle {
+    position: relative;
+}
+.dropdown-item.dropdown-toggle::after {
+    position: absolute;
+    right: .8rem;
+    top: .8rem;
+}

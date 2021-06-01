@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Filterable;
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Filterable;
 
     protected $hidden = ['deleted_at'];
 
@@ -18,6 +19,13 @@ class Post extends Model
         'creator_id'
     ];
 
+    // public $filterable = [];
+
+    public function filterTitle($query, $value) {
+        return $query->where('title', 'LIKE', '%' . $value . '%');
+    }
+
+    // Relationships
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'post_categories', 'post_id', 'category_id');
