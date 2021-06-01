@@ -77,6 +77,12 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <form class="form-group has-search mb-0 float-right">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input type="search" name="keyword" class="form-control" placeholder="Search">
+                            </form>
+                        </div>
                     </div>
 
                     <table class="table table-responsive-xl table-bordered">
