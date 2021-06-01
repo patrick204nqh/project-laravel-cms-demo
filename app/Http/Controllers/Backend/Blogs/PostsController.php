@@ -8,6 +8,7 @@ class PostsController extends BackendController
 {
     public function list()
     {
-        return view('backend.blogs.posts.list');
+        $posts = \App\Models\Post::all();
+        return view('backend.blogs.posts.list', compact('posts'));
     }
 }

@@ -8,6 +8,7 @@ class CategoriesController extends BackendController
 {
     public function list()
     {
-        return view('backend.blogs.categories.list');
+        $categories = \App\Models\Category::all();
+        return view('backend.blogs.categories.list', compact('categories'));
     }
 }
