@@ -12,44 +12,29 @@
         <div class="col-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h3><i class="fas fa-table"></i> Bordered table</h3>
-                    Add <i>.table-bordered</i> for borders on all sides of the table and cells. <a target="_blank" href="https://getbootstrap.com/docs/4.3/content/tables/#bordered-table">(more
-                        info)</a>
+                    <h3><i class="fas fa-table"></i> List blog category</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-responsive-xl table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Username</th>
+                                <th scope="col">Alias</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Creator</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@TwBootstrap</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @forelse ($categories as $category)
+                                <tr>
+                                    <th scope="row">{{ $category->id }}</th>
+                                    <td>{{ $category->alias }}</td>
+                                    <td>{{ $category->description }}</td>
+                                    <td>{{ $category->creator->name ?? 'No' }}</td>
+                                </tr>
+                            @empty
+                                <div class="alert alert-warning">Empty blog category</div>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
