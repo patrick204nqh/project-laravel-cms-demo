@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Filterable;
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Filterable;
 
     protected $hidden = ['deleted_at'];
 
@@ -19,6 +20,11 @@ class Category extends Model
         'creator_id'
     ];
 
+    public function filterAlias($query, $value) {
+        return $query->where('alias', 'LIKE', '%' . $value . '%');
+    }
+
+    // Relationships
     public function parent()
     {
         return $this->belongsTo('App\Models\Category', 'parent_id');
