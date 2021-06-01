@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Permission::class, 'user_id');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'creator_id');
+    }
 }
