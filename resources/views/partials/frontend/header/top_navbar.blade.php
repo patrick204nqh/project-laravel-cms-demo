@@ -17,24 +17,40 @@
     <div class="container">
         <!-- Navbar Brand -->
         <div class="navbar-header d-flex align-items-center justify-content-between">
-        <!-- Navbar Brand --><a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+        <!-- Navbar Brand --><a href="index.html" class="navbar-brand">CRM Demo</a>
         <!-- Toggle Button-->
         <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
         </div>
         <!-- Navbar Menu -->
         <div id="navbarcollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link active ">Home</a>
+            <li class="nav-item"><a href="{{ \Route::has('home') ? route('home') : '' }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
             </li>
-            <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link ">Blog</a>
-            </li>
-            <li class="nav-item"><a href="post.html" class="nav-link ">Post</a>
-            </li>
-            <li class="nav-item"><a href="#" class="nav-link ">Contact</a>
-            </li>
+            <li class="nav-item"><a href="{{ \Route::has('blog') ? route('blog') : '' }}" class="nav-link {{ request()->is('blog') ? 'active' : '' }}">Blog</a>
         </ul>
-        <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
-        <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul>
+        <div class="navbar-text"><a href="#" class="search-btn"><i class="fa fa-search"></i></a></div>
+        <div class="navbar-text">
+            <div class="dropdown">
+                <a class="account-btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @guest
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                    @endguest
+                    @auth
+                        <img class="rounded-circle" src="https://via.placeholder.com/20" alt="Profile">
+                    @endauth
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @guest
+                    <a class="dropdown-item" href="{{ \Route::has('login') ? route('login') : '' }}">Login</a>
+                    <a class="dropdown-item" href="{{ \Route::has('login') ? route('register') : '' }}">Register</a>
+                @endguest
+                @auth
+                    <a class="dropdown-item" href="{{ \Route::has('login') ? route('logout') : '' }}">Logout</a>
+                @endauth
+                </div>
+            </div>
+        </div>
+        <!-- <ul class="langs navbar-text"><a href="#" class="active">EN</a><span>           </span><a href="#">ES</a></ul> -->
         </div>
     </div>
 </nav>

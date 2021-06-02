@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 Route::get('/', ['App\Http\Controllers\Frontend\HomeController', 'index'])->name('home');
 Route::get('/blog', ['App\Http\Controllers\Frontend\BlogController', 'index'])->name('blog');
 Route::get('/blog/cat-{category_id}', ['App\Http\Controllers\Frontend\BlogController', 'index'])->name('blog_category');
