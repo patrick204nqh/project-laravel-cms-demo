@@ -1,0 +1,11 @@
+.navbar .account-btn {
+    color: #333;
+    font-size: 0.9em;
+}
+.navbar .account-btn {
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid #ddd;
+    height: 20px;
+    line-height: 20px;
+}
