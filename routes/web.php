@@ -18,7 +18,8 @@ Auth::routes();
 
 Route::get('/', ['App\Http\Controllers\Frontend\HomeController', 'index'])->name('home');
 Route::get('/blog', ['App\Http\Controllers\Frontend\BlogController', 'index'])->name('blog');
-Route::get('/blog/{id}/details', ['App\Http\Controllers\Frontend\BlogController', 'details'])->name('blog_details');
+Route::get('/blog/cat-{category_id}', ['App\Http\Controllers\Frontend\BlogController', 'index'])->name('blog_category');
+Route::get('/blog/{post_id}/details', ['App\Http\Controllers\Frontend\BlogController', 'details'])->name('blog_details');
 
 Route::group(['prefix'=>'backend', 'middleware'=>['can:isAdmin'] , 'as'=>'backend.'], function() {
     // Dashboard

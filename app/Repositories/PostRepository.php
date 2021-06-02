@@ -11,7 +11,7 @@ class PostRepository extends BaseRepository implements RepositoryInterface
         return \App\Models\Post::class;
     }
 
-    public function getPosts($params)
+    public function getPosts($params = null)
     {
         $query = $this->model;
 
