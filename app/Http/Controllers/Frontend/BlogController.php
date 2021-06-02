@@ -6,12 +6,9 @@ use App\Repositories\PostRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Support\Collection;
-use App\Traits\TrackReaderable;
 
 class BlogController extends FrontendController
 {
-    use TrackReaderable;
-
     public $postRepository;
     public $categoryRepository;
 
@@ -36,7 +33,7 @@ class BlogController extends FrontendController
     public function details($post_id)
     {
         $currentPost = \App\Models\Post::findOrFail($post_id);
-        if(\Auth::check()) $this->incrementReaderCount(\Auth::user(), $currentPost);
+        if(\Auth::check()) dispatch(new \App\Jobs\IncrementReadCountPost(\Auth::user(), $currentPost));
         return view('frontend.blog.details', compact('currentPost'));
     }
 }

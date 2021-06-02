@@ -2,15 +2,16 @@
 
 namespace App\Traits;
 
+use App\Models\User;
+use App\Models\Post;
+
 trait TrackReaderable
 {
-    private function incrementReaderCount($user = null, $post = null)
+    private function incrementReaderCount(User $user, Post $post)
     {
-        if(!($user instanceof \Illuminate\Database\Eloquent\Model) || !($post instanceof \Illuminate\Database\Eloquent\Model)) return false;
         $reader = \App\Models\Reader::firstOrCreate([
             'user_id' => $user->id,
             'post_id' => $post->id
-        ]);
-        return $reader->increment('read_count');
+        ])->increment('read_count');
     }
 }
