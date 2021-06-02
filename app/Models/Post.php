@@ -35,5 +35,16 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+
+    public function readers()
+    {
+        return $this->belongsToMany(User::class, 'readers', 'post_id', 'user_id');
+    }
+
+    public function totalViewed()
+    {
+        $readCounts = $this->hasMany(Reader::class, 'post_id')->pluck('read_count')->toArray();
+        return array_sum($readCounts);
+    }
 }
 

@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'creator_id');
     }
+
+    public function viewed()
+    {
+        return $this->belongsToMany(Post::class, 'readers', 'user_id', 'post_id');
+    }
 }
