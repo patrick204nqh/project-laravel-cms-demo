@@ -64,10 +64,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $userCreated = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+        // Update role as DEFAULT when register
+        $this->updateRoleAsDefault($userCreated);
+        return $userCreated;
+    }
+
+    private function updateRoleAsDefault($user)
+    {
+        $typeDefault = config('roles.user') ?? 'DEFAULT';
+        $roleUserDefault = \App\Models\Role::where('type', $typeDefault)->firstOrFail();
+        return \App\Models\Permission::create([
+            'user_id' => $user->id,
+            'role_id'=> $roleUserDefault->id
         ]);
     }
 }
