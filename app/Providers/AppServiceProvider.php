@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(ComposerServiceProvider::class);
     }
 
     /**
@@ -26,15 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Collection::macro('paginate', function ($total = null, $perPage = 15, $pageName = 'page', $page = null) {
-            $page = $page ?: Paginator::resolveCurrentPage($pageName);
-            $total = $total ?: $this->count();
-            $items = $total ? $this : $this->forPage($page, $perPage);
-
-            return new LengthAwarePaginator($items, $total, $perPage, $page, [
-                'path' => Paginator::resolveCurrentPath(),
-                'pageName' => $pageName,
-            ]);
-        });
+       //
     }
 }
