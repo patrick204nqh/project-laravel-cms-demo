@@ -56,4 +56,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'readers', 'user_id', 'post_id');
     }
+
+    public function mailbox()
+    {
+        return $this->hasMany(Mailer::class, 'recipient_id');
+    }
 }

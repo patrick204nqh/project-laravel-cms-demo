@@ -22,7 +22,7 @@
                     <div class="title"><span>{{ $currentPost->creator->name ?? '' }}</span></div></a>
                     <div class="d-flex align-items-center flex-wrap">
                     <div class="date"><i class="icon-clock"></i> {{ relative_time($currentPost->created_at) ?? '' }}</div>
-                    <div class="views"><i class="icon-eye"></i> {{ $currentPost->totalViewed() ?? '' }}</div>
+                    <div class="views"><i class="icon-eye"></i> {{ $currentPost->total_viewed ?? '' }}</div>
                     <!-- <div class="comments meta-last"><i class="icon-comment"></i>12</div> -->
                     </div>
                 </div>

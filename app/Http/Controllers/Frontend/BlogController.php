@@ -6,9 +6,13 @@ use App\Repositories\PostRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Support\Collection;
+use App\Models\Post;
+use App\Traits\UpdateViewedPost;
 
 class BlogController extends FrontendController
 {
+    use UpdateViewedPost;
+
     public $postRepository;
     public $categoryRepository;
 
@@ -32,8 +36,11 @@ class BlogController extends FrontendController
 
     public function details($post_id)
     {
-        $currentPost = \App\Models\Post::findOrFail($post_id);
-        if(\Auth::check()) dispatch(new \App\Jobs\IncrementReadCountPost(\Auth::user(), $currentPost));
+        $currentPost = Post::findOrFail($post_id);
+        if(\Auth::check()) {
+            dispatch(new \App\Jobs\IncrementReadCountPost(\Auth::user(), $currentPost));
+            $this->updateViewedPost($currentPost);
+        }
         return view('frontend.blog.details', compact('currentPost'));
     }
 }
