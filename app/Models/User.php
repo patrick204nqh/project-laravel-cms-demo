@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
         'last_login_at'
     ];
 
@@ -42,13 +43,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles() {
-        return $this->belongsToMany(Role::class, 'permissions', 'user_id', 'role_id');
-    }
-
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class, 'user_id');
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 
     public function posts()
