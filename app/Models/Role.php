@@ -9,6 +9,10 @@ class Role extends Model
 {
     use HasFactory;
 
+    const MANAGER = 'MANAGER';
+    const ADMIN = 'ADMIN';
+    const USER = 'DEFAULT';
+
     protected $fillable = [
         'alias',
         'type',
@@ -17,11 +21,6 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'permissions', 'role_id', 'user_id');
-    }
-
-    public function permissions()
-    {
-        return $this->hasMany(Permission::class, 'role_id');
+        return $this->hasMany(User::class, 'role_id');
     }
 }

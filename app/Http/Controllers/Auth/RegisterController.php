@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,23 +65,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $userCreated = User::create([
+        $roleUserDefault = Role::where('type', Role::USER)->firstOrFail();
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-        ]);
-        // Update role as DEFAULT when register
-        $this->updateRoleAsDefault($userCreated);
-        return $userCreated;
-    }
-
-    private function updateRoleAsDefault($user)
-    {
-        $typeDefault = config('roles.user') ?? 'DEFAULT';
-        $roleUserDefault = \App\Models\Role::where('type', $typeDefault)->firstOrFail();
-        return \App\Models\Permission::create([
-            'user_id' => $user->id,
-            'role_id'=> $roleUserDefault->id
+            'role_id' => $roleUserDefault->id
         ]);
     }
 }
