@@ -46,5 +46,17 @@ class Post extends Model
         $readCounts = $this->hasMany(Reader::class, 'post_id')->pluck('read_count')->toArray();
         return array_sum($readCounts);
     }
+
+    public function viewed()
+    {
+        return $this->hasMany(Reader::class, 'post_id');
+    }
+
+    public function latestViewed()
+    {
+        $viewedTimes = $this->viewed()->pluck('updated_at')->toArray();
+        usort($viewedTimes, 'compare_by_timestamp'); // global functions
+        return end($viewedTimes);
+    }
 }
 
