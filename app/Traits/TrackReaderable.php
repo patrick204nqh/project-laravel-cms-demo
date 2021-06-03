@@ -9,7 +9,7 @@ trait TrackReaderable
 {
     private function incrementReaderCount(User $user, Post $post)
     {
-        $reader = \App\Models\Reader::firstOrCreate([
+        \App\Models\Reader::firstOrCreate([
             'user_id' => $user->id,
             'post_id' => $post->id
         ])->increment('read_count');

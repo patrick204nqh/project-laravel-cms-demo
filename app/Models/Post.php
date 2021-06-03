@@ -16,7 +16,9 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
-        'creator_id'
+        'creator_id',
+        'total_viewed',
+        'latest_viewed_at'
     ];
 
     // public $filterable = [];

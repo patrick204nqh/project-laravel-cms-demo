@@ -15,7 +15,8 @@ class CreateMailersTable extends Migration
     {
         Schema::create('mailers', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['PENDING', 'SENDING', 'DONE', 'ERROR']);
+            $table->enum('status', ['PENDING', 'SENDING', 'DONE', 'ERROR'])->default('PENDING');
+            $table->string('type')->nullable();
             $table->unsignedBigInteger('recipient_id');
             $table->foreign('recipient_id')->references('id')->on('users');
             $table->timestamps();
