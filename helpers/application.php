@@ -63,3 +63,11 @@ if (! function_exists('relative_time')) {
         }
     }
 }
+
+if (! function_exists('compare_by_timestamp')) {
+    function compare_by_timestamp($timeA, $timeB) {
+        $a_timestamp = strtotime($timeA);
+        $b_timestamp = strtotime($timeB);
+        return $a_timestamp <=> $b_timestamp;
+    }
+}
